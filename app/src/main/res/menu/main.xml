@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".StartActivity">
+
+  <item
+      android:id="@+id/action_clear_best_time"
+      android:orderInCategory="100"
+      android:title="@string/clear_best_time"
+      app:showAsAction="never" />
+
+</menu>
