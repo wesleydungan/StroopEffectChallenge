@@ -7,10 +7,10 @@
   <string name="best_time">Best Time:</string>
   <string name="best_time_default_value">-m--.-s</string>
 
-  <string name="instructions">You will be presented with a sequence of 30 words. As quickly as
-    possible, identify the color used to write each word. For example, if the word \"Bumfuzzled\"
-    was written using the color red, then you would press the button labeled \"Red\". However,
-    there is a catch. The words are the names of colors!</string>
+  <string name="instructions">You\'ll be presented with a sequence of 30 words. Identify the color
+    used to display each word as quickly as possible. For example, if the word \"Bumfuzzled\"
+    is displayed using the color red, then press the button labeled \"Red\". However, there\'s a
+    catch. The words are the names of colors!</string>
 
   <string name="exit">Exit</string>
   <string name="start">Start</string>

@@ -4,9 +4,9 @@ android {
   defaultConfig {
     applicationId 'com.wesleydungan.stroopeffectchallenge'
     minSdkVersion 10
-    targetSdkVersion 'android-L'
-    versionCode 2
-    versionName '1.0.1'
+    targetSdkVersion 20
+    versionCode 3
+    versionName '1.0'
   }
   buildTypes {
     release {
@@ -15,12 +15,12 @@ android {
     }
   }
   buildToolsVersion '20.0.0'
-  compileSdkVersion 'android-L'
+  compileSdkVersion 20
   productFlavors {
   }
 }
 
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
-  compile 'com.android.support:appcompat-v7:19.+'
+  compile 'com.android.support:appcompat-v7:20.0.0'
 }

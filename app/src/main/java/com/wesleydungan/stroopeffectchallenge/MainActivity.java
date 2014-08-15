@@ -37,7 +37,9 @@ public class MainActivity extends Activity
   long start_time;
 
   Random rand;
-  int color_id;
+  int last_color_index;
+  int last_name_index;
+  int color_button_id;
 
 
   View.OnClickListener onClickListener = new View.OnClickListener()
@@ -45,7 +47,7 @@ public class MainActivity extends Activity
     @Override
     public void onClick(final View v)
     {
-      if (running && (color_id == v.getId()))
+      if (running && (color_button_id == v.getId()))
       {
         progress += 1;
 
@@ -152,6 +154,8 @@ public class MainActivity extends Activity
     handler.postDelayed(runnable, 100);
 
     rand = new Random();
+    last_color_index = -1;
+    last_name_index = -1;
     progress = 0;
     nextChallenge();
   }
@@ -175,43 +179,59 @@ public class MainActivity extends Activity
   {
     Resources res = getResources();
 
-    // use 4 instead of 6 when the yellow and orange buttons are "gone"
-    switch (rand.nextInt(4))
+    int new_color_index;
+
+    do
+    {
+      // use 4 instead of 6 when the yellow and orange buttons are "gone"
+      new_color_index = rand.nextInt(4);
+    }
+    while (new_color_index == last_color_index);
+
+    switch (new_color_index)
     {
       case 0:
         // red
-        color_id = R.id.redButton;
+        color_button_id = R.id.redButton;
         color_name_text_view.setTextColor(res.getColor(R.color.red));
         break;
       case 1:
         // green
-        color_id = R.id.greenButton;
+        color_button_id = R.id.greenButton;
         color_name_text_view.setTextColor(res.getColor(R.color.green));
         break;
       case 2:
         // blue
-        color_id = R.id.blueButton;
+        color_button_id = R.id.blueButton;
         color_name_text_view.setTextColor(res.getColor(R.color.blue));
         break;
       case 3:
         // white
-        color_id = R.id.whiteButton;
+        color_button_id = R.id.whiteButton;
         color_name_text_view.setTextColor(res.getColor(R.color.white));
         break;
       case 4:
         // yellow
-        color_id = R.id.yellowButton;
+        color_button_id = R.id.yellowButton;
         color_name_text_view.setTextColor(res.getColor(R.color.yellow));
         break;
       case 5:
         // orange
-        color_id = R.id.orangeButton;
+        color_button_id = R.id.orangeButton;
         color_name_text_view.setTextColor(res.getColor(R.color.orange));
         break;
     }
 
-    // use 4 instead of 6 when the yellow and orange buttons are "gone"
-    switch (rand.nextInt(4))
+    int new_name_index;
+
+    do
+    {
+      // use 4 instead of 6 when the yellow and orange buttons are "gone"
+      new_name_index = rand.nextInt(4);
+    }
+    while ((new_name_index == last_name_index) || (new_name_index == new_color_index));
+
+    switch (new_name_index)
     {
       case 0:
         // red
@@ -238,5 +258,8 @@ public class MainActivity extends Activity
         color_name_text_view.setText(getString(R.string.orange));
         break;
     }
+
+    last_color_index = new_color_index;
+    last_name_index = new_name_index;
   }
 }
