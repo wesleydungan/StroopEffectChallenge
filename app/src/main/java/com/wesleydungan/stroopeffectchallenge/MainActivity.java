@@ -6,8 +6,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -190,36 +190,36 @@ public class MainActivity extends Activity
 
     switch (new_color_index)
     {
-      case 0:
-        // red
-        color_button_id = R.id.redButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.red));
-        break;
-      case 1:
-        // green
-        color_button_id = R.id.greenButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.green));
-        break;
-      case 2:
-        // blue
-        color_button_id = R.id.blueButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.blue));
-        break;
-      case 3:
-        // white
-        color_button_id = R.id.whiteButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.white));
-        break;
-      case 4:
-        // yellow
-        color_button_id = R.id.yellowButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.yellow));
-        break;
-      case 5:
-        // orange
-        color_button_id = R.id.orangeButton;
-        color_name_text_view.setTextColor(res.getColor(R.color.orange));
-        break;
+    case 0:
+      // red
+      color_button_id = R.id.redButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.red));
+      break;
+    case 1:
+      // green
+      color_button_id = R.id.greenButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.green));
+      break;
+    case 2:
+      // blue
+      color_button_id = R.id.blueButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.blue));
+      break;
+    case 3:
+      // white
+      color_button_id = R.id.whiteButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.white));
+      break;
+    case 4:
+      // yellow
+      color_button_id = R.id.yellowButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.yellow));
+      break;
+    case 5:
+      // orange
+      color_button_id = R.id.orangeButton;
+      color_name_text_view.setTextColor(res.getColor(R.color.orange));
+      break;
     }
 
     int new_name_index;
@@ -233,30 +233,30 @@ public class MainActivity extends Activity
 
     switch (new_name_index)
     {
-      case 0:
-        // red
-        color_name_text_view.setText(getString(R.string.red));
-        break;
-      case 1:
-        // green
-        color_name_text_view.setText(getString(R.string.green));
-        break;
-      case 2:
-        // blue
-        color_name_text_view.setText(getString(R.string.blue));
-        break;
-      case 3:
-        // white
-        color_name_text_view.setText(getString(R.string.white));
-        break;
-      case 4:
-        // yellow
-        color_name_text_view.setText(getString(R.string.yellow));
-        break;
-      case 5:
-        // orange
-        color_name_text_view.setText(getString(R.string.orange));
-        break;
+    case 0:
+      // red
+      color_name_text_view.setText(getString(R.string.red));
+      break;
+    case 1:
+      // green
+      color_name_text_view.setText(getString(R.string.green));
+      break;
+    case 2:
+      // blue
+      color_name_text_view.setText(getString(R.string.blue));
+      break;
+    case 3:
+      // white
+      color_name_text_view.setText(getString(R.string.white));
+      break;
+    case 4:
+      // yellow
+      color_name_text_view.setText(getString(R.string.yellow));
+      break;
+    case 5:
+      // orange
+      color_name_text_view.setText(getString(R.string.orange));
+      break;
     }
 
     last_color_index = new_color_index;

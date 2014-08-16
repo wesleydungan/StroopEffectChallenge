@@ -97,13 +97,13 @@ public class StartActivity extends ActionBarActivity
   {
     switch (item.getItemId())
     {
-      case R.id.action_clear_best_time:
-        clearBestTime();
-        String time_string = formattedTimeString(getBestTime());
-        best_time_text_view.setText(time_string);
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
+    case R.id.action_clear_best_time:
+      clearBestTime();
+      String time_string = formattedTimeString(getBestTime());
+      best_time_text_view.setText(time_string);
+      return true;
+    default:
+      return super.onOptionsItemSelected(item);
     }
   }
 
