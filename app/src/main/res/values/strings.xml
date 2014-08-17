@@ -21,22 +21,22 @@
   <string name="time">Time:</string>
   <string name="time_start_value">0m00.0s</string>
 
-  <string name="red">RED</string>
+  <string name="red">Red</string>
   <color name="red">#ffff0000</color>
 
-  <string name="green">GREEN</string>
+  <string name="green">Green</string>
   <color name="green">#ff00ff00</color>
 
-  <string name="blue">BLUE</string>
+  <string name="blue">Blue</string>
   <color name="blue">#ff0000ff</color>
 
-  <string name="white">WHITE</string>
+  <string name="white">White</string>
   <color name="white">#ffffffff</color>
 
-  <string name="yellow">YELLOW</string>
+  <string name="yellow">Yellow</string>
   <color name="yellow">#ffffff00</color>
 
-  <string name="orange">ORANGE</string>
+  <string name="orange">Orange</string>
   <color name="orange">#ffff8000</color>
 
   <string name="done">It took you %s to complete the challenge.</string>

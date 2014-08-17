@@ -3,12 +3,13 @@ package com.wesleydungan.stroopeffectchallenge;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,11 +18,11 @@ import java.util.Random;
 
 public class MainActivity extends Activity
 {
-  Context context = this;
+  MainActivity context = this;
 
   TextView progress_value_text_view;
   TextView time_value_text_view;
-  TextView color_name_text_view;
+  public TextView color_name_text_view;
 
   Button red_button;
   Button green_button;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity
 
   Handler handler;
   boolean running;
+  boolean accept_click;
   long start_time;
 
   Random rand;
@@ -47,8 +49,9 @@ public class MainActivity extends Activity
     @Override
     public void onClick(final View v)
     {
-      if (running && (color_button_id == v.getId()))
+      if (running && accept_click && (color_button_id == v.getId()))
       {
+        // correct click
         progress += 1;
 
         if (progress > 30)
@@ -97,6 +100,34 @@ public class MainActivity extends Activity
         {
           progress_value_text_view.setText(String.format("%d/30", progress));
           nextChallenge();
+        }
+      }
+      else
+      {
+        // incorrect click
+        if (accept_click)
+        {
+          Animation wrong_click_anim = AnimationUtils.loadAnimation(context, R.anim.wrong_click);
+
+          wrong_click_anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation)
+            {
+              // the user won't be able to click again until the animation is over
+              accept_click = false;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation)
+            {
+              accept_click = true;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+          });
+
+          color_name_text_view.startAnimation(wrong_click_anim);
         }
       }
     }
@@ -148,30 +179,34 @@ public class MainActivity extends Activity
     orange_button = (Button) findViewById(R.id.orangeButton);
     orange_button.setOnClickListener(onClickListener);
 
-    handler = new Handler();
-    running = true;
-    start_time = System.currentTimeMillis();
-    handler.postDelayed(runnable, 100);
-
     rand = new Random();
     last_color_index = -1;
     last_name_index = -1;
     progress = 0;
     nextChallenge();
-  }
 
+    Animation first_word_anim = AnimationUtils.loadAnimation(context, R.anim.first_word);
 
-  @Override
-  public void onSaveInstanceState(Bundle savedInstanceState)
-  {
-    super.onSaveInstanceState(savedInstanceState);
-  }
+    first_word_anim.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart(Animation animation) {
+        running = true;
+        accept_click = true;
+      }
 
+      @Override
+      public void onAnimationEnd(Animation animation)
+      {
+        handler = new Handler();
+        start_time = System.currentTimeMillis();
+        handler.postDelayed(runnable, 100);
+      }
 
-  @Override
-  public void onRestoreInstanceState(Bundle savedInstanceState)
-  {
-    super.onRestoreInstanceState(savedInstanceState);
+      @Override
+      public void onAnimationRepeat(Animation animation) {}
+    });
+
+    color_name_text_view.startAnimation(first_word_anim);
   }
 
 
@@ -235,27 +270,27 @@ public class MainActivity extends Activity
     {
     case 0:
       // red
-      color_name_text_view.setText(getString(R.string.red));
+      color_name_text_view.setText(getString(R.string.red).toUpperCase());
       break;
     case 1:
       // green
-      color_name_text_view.setText(getString(R.string.green));
+      color_name_text_view.setText(getString(R.string.green).toUpperCase());
       break;
     case 2:
       // blue
-      color_name_text_view.setText(getString(R.string.blue));
+      color_name_text_view.setText(getString(R.string.blue).toUpperCase());
       break;
     case 3:
       // white
-      color_name_text_view.setText(getString(R.string.white));
+      color_name_text_view.setText(getString(R.string.white).toUpperCase());
       break;
     case 4:
       // yellow
-      color_name_text_view.setText(getString(R.string.yellow));
+      color_name_text_view.setText(getString(R.string.yellow).toUpperCase());
       break;
     case 5:
       // orange
-      color_name_text_view.setText(getString(R.string.orange));
+      color_name_text_view.setText(getString(R.string.orange).toUpperCase());
       break;
     }
 
