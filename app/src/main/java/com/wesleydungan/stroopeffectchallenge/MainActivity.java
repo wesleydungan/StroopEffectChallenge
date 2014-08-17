@@ -55,8 +55,9 @@ public class MainActivity extends Activity
         {
           // correct click
           progress += 1;
+          progress_value_text_view.setText(String.format("%d/30", progress));
 
-          if (progress > 30)
+          if (progress >= 30)
           {
             running = false;
 
@@ -100,7 +101,6 @@ public class MainActivity extends Activity
           }
           else
           {
-            progress_value_text_view.setText(String.format("%d/30", progress));
             nextChallenge();
           }
         }
