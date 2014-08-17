@@ -49,63 +49,62 @@ public class MainActivity extends Activity
     @Override
     public void onClick(final View v)
     {
-      if (running && accept_click && (color_button_id == v.getId()))
+      if (running && accept_click)
       {
-        // correct click
-        progress += 1;
-
-        if (progress > 30)
+        if (color_button_id == v.getId())
         {
-          running = false;
+          // correct click
+          progress += 1;
 
-          long time = System.currentTimeMillis() - start_time;
-          String time_string = StartActivity.formattedTimeString(time);
-
-          time_value_text_view.setText(time_string);
-
-          String dialog_message = String.format(getString(R.string.done), time_string);
-
-          long best_time = StartActivity.getBestTime();
-
-          if (time < best_time)
+          if (progress > 30)
           {
-            StartActivity.setBestTime(time);
+            running = false;
 
-            if (best_time < 600000)
+            long time = System.currentTimeMillis() - start_time;
+            String time_string = StartActivity.formattedTimeString(time);
+
+            time_value_text_view.setText(time_string);
+
+            String dialog_message = String.format(getString(R.string.done), time_string);
+
+            long best_time = StartActivity.getBestTime();
+
+            if (time < best_time)
             {
-              String best_time_string = StartActivity.formattedTimeString(best_time);
-              dialog_message += " ";
-              dialog_message += String.format(getString(R.string.new_best_time),
-                      best_time_string);
+              StartActivity.setBestTime(time);
+
+              if (best_time < 600000)
+              {
+                String best_time_string = StartActivity.formattedTimeString(best_time);
+                dialog_message += " ";
+                dialog_message += String.format(getString(R.string.new_best_time),
+                        best_time_string);
+              }
             }
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setMessage(dialog_message);
+
+            alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i)
+              {
+                finish();
+              }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
           }
-
-          AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-          alertDialogBuilder.setCancelable(false);
-          alertDialogBuilder.setMessage(dialog_message);
-
-          alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+          else
           {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-              finish();
-            }
-          });
-
-          AlertDialog alertDialog = alertDialogBuilder.create();
-          alertDialog.show();
+            progress_value_text_view.setText(String.format("%d/30", progress));
+            nextChallenge();
+          }
         }
         else
-        {
-          progress_value_text_view.setText(String.format("%d/30", progress));
-          nextChallenge();
-        }
-      }
-      else
-      {
-        // incorrect click
-        if (accept_click)
         {
           Animation wrong_click_anim = AnimationUtils.loadAnimation(context, R.anim.wrong_click);
 
@@ -189,15 +188,14 @@ public class MainActivity extends Activity
 
     first_word_anim.setAnimationListener(new Animation.AnimationListener() {
       @Override
-      public void onAnimationStart(Animation animation) {
-        running = true;
-        accept_click = true;
-      }
+      public void onAnimationStart(Animation animation) {}
 
       @Override
       public void onAnimationEnd(Animation animation)
       {
         handler = new Handler();
+        running = true;
+        accept_click = true;
         start_time = System.currentTimeMillis();
         handler.postDelayed(runnable, 100);
       }
