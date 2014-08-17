@@ -14,9 +14,8 @@ import android.widget.TextView;
 
 public class StartActivity extends ActionBarActivity
 {
-  static Context context;
-
-  TextView best_time_text_view;
+  private static StartActivity context;
+  private TextView best_time_text_view;
 
 
   static long getBestTime()

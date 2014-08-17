@@ -5,7 +5,7 @@ android {
     applicationId 'com.wesleydungan.stroopeffectchallenge'
     minSdkVersion 10
     targetSdkVersion 20
-    versionCode 5
+    versionCode 6
     versionName '1.0'
   }
   buildTypes {

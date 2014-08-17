@@ -18,33 +18,26 @@ import java.util.Random;
 
 public class MainActivity extends Activity
 {
-  MainActivity context = this;
+  private MainActivity context;
 
-  TextView progress_value_text_view;
-  TextView time_value_text_view;
-  public TextView color_name_text_view;
+  private TextView progress_value_text_view;
+  private TextView time_value_text_view;
+  private TextView color_name_text_view;
 
-  Button red_button;
-  Button green_button;
-  Button blue_button;
-  Button white_button;
-  Button yellow_button;
-  Button orange_button;
+  private int progress;
 
-  int progress;
+  private Handler handler;
+  private boolean running;
+  private boolean accept_click;
+  private long start_time;
 
-  Handler handler;
-  boolean running;
-  boolean accept_click;
-  long start_time;
-
-  Random rand;
-  int last_color_index;
-  int last_name_index;
-  int color_button_id;
+  private Random rand;
+  private int last_color_index;
+  private int last_name_index;
+  private int color_button_id;
 
 
-  View.OnClickListener onClickListener = new View.OnClickListener()
+  final private View.OnClickListener onClickListener = new View.OnClickListener()
   {
     @Override
     public void onClick(final View v)
@@ -108,7 +101,8 @@ public class MainActivity extends Activity
         {
           Animation wrong_click_anim = AnimationUtils.loadAnimation(context, R.anim.wrong_click);
 
-          wrong_click_anim.setAnimationListener(new Animation.AnimationListener() {
+          wrong_click_anim.setAnimationListener(new Animation.AnimationListener()
+          {
             @Override
             public void onAnimationStart(Animation animation)
             {
@@ -133,49 +127,35 @@ public class MainActivity extends Activity
   };
 
 
-  Runnable runnable = new Runnable()
-  {
-    @Override
-    public void run()
-    {
-      if (running)
-      {
-        long duration = System.currentTimeMillis() - start_time;
-        String time_string = StartActivity.formattedTimeString(duration);
-        time_value_text_view.setText(time_string);
-        handler.postDelayed(runnable, 100);
-      }
-    }
-  };
-
-
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    progress_value_text_view = (TextView) findViewById(R.id.progressValueTextView);
-    time_value_text_view = (TextView) findViewById(R.id.timeValueTextView);
+    context = this;
 
-    color_name_text_view = (TextView) findViewById(R.id.colorNameTextView);
+    progress_value_text_view = (TextView)findViewById(R.id.progressValueTextView);
+    time_value_text_view = (TextView)findViewById(R.id.timeValueTextView);
 
-    red_button = (Button) findViewById(R.id.redButton);
+    color_name_text_view = (TextView)findViewById(R.id.colorNameTextView);
+
+    Button red_button = (Button)findViewById(R.id.redButton);
     red_button.setOnClickListener(onClickListener);
 
-    green_button = (Button) findViewById(R.id.greenButton);
+    Button green_button = (Button)findViewById(R.id.greenButton);
     green_button.setOnClickListener(onClickListener);
 
-    blue_button = (Button) findViewById(R.id.blueButton);
+    Button blue_button = (Button)findViewById(R.id.blueButton);
     blue_button.setOnClickListener(onClickListener);
 
-    white_button = (Button) findViewById(R.id.whiteButton);
+    Button white_button = (Button)findViewById(R.id.whiteButton);
     white_button.setOnClickListener(onClickListener);
 
-    yellow_button = (Button) findViewById(R.id.yellowButton);
+    Button yellow_button = (Button)findViewById(R.id.yellowButton);
     yellow_button.setOnClickListener(onClickListener);
 
-    orange_button = (Button) findViewById(R.id.orangeButton);
+    Button orange_button = (Button)findViewById(R.id.orangeButton);
     orange_button.setOnClickListener(onClickListener);
 
     rand = new Random();
@@ -186,7 +166,8 @@ public class MainActivity extends Activity
 
     Animation first_word_anim = AnimationUtils.loadAnimation(context, R.anim.first_word);
 
-    first_word_anim.setAnimationListener(new Animation.AnimationListener() {
+    first_word_anim.setAnimationListener(new Animation.AnimationListener()
+    {
       @Override
       public void onAnimationStart(Animation animation) {}
 
@@ -207,8 +188,7 @@ public class MainActivity extends Activity
     color_name_text_view.startAnimation(first_word_anim);
   }
 
-
-  public void nextChallenge()
+  private void nextChallenge()
   {
     Resources res = getResources();
 
@@ -295,4 +275,21 @@ public class MainActivity extends Activity
     last_color_index = new_color_index;
     last_name_index = new_name_index;
   }
+
+  final private Runnable runnable = new Runnable()
+  {
+    @Override
+    public void run()
+    {
+      if (running)
+      {
+        long duration = System.currentTimeMillis() - start_time;
+        String time_string = StartActivity.formattedTimeString(duration);
+        time_value_text_view.setText(time_string);
+        handler.postDelayed(runnable, 100);
+      }
+    }
+  };
+
+
 }
